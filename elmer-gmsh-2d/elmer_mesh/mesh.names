@@ -1,0 +1,5 @@
+! ----- names for boundaries -----
+$ inlet = 1
+$ outlet = 2
+$ wall = 3
+$ fluid = 4

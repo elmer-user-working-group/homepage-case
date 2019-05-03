@@ -1,0 +1,93 @@
+
+Header
+  Mesh DB "." "elmer_mesh"
+End
+
+Simulation
+  Max Output Level = 5
+  Coordinate System =  Cartesian 2D
+
+
+  Simulation Type = Steady
+  Steady State Max Iterations = 200
+
+  Output Intervals = 100
+  Solver Input File = elmer_mesh.sif
+  Post File = case.vtu
+
+End
+
+
+
+Body 1
+  Name = fluid
+  Target Bodies(1) = 4
+  Equation(1) = 1
+  Material(1) = 1
+  Initial Condition(1) = 1
+End
+
+Equation 1
+  Name = "Equation1"
+   Navier-Stokes = True
+End
+
+Initial Condition 1
+
+  Velocity 1 = 1
+  Velocity 2 = 0
+End
+
+Solver 1
+  Equation = Navier-Stokes
+
+  Stabilization Method = String Bubbles
+
+  Nonlinear System Max Iterations = 10
+  Nonlinear System Convergence Tolerance = 1.0e-5
+  Nonlinear System Newton After Iterations = 10
+  Nonlinear System Newton After Tolerance  = 1.0e-5
+  Nonlinear System Relaxation Factor = 0.1
+
+  Linear System Solver = Iterative
+  Linear System Max Iterations = 1000
+  Linear System Iterative Method = BiCGStab
+  Linear System Preconditioning = ILU2
+  Linear System Convergence Tolerance = 1.0e-5
+
+
+
+  Steady State Convergence Tolerance = 1.0e-7
+End
+
+Material 1
+  Name = "Material1"
+  Density = 1
+  Viscosity = 0.01
+End
+
+
+Boundary Condition 1
+  Name = inlet
+  Target Boundaries(1) = 1
+  Velocity 1 = 0.1
+  Velocity 2 = 0
+
+End
+
+Boundary Condition 2
+  Name = outlet
+  Target Boundaries(1) = 2
+  Pressure = 0
+
+End
+
+Boundary Condition 3
+  Name = wall
+  Target Boundaries(1) = 3
+  Velocity 1 = 0
+  Velocity 2 = 0
+End
+
+
+RUN

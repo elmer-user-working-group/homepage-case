@@ -1,0 +1,9 @@
+! ----- names for boundaries -----
+$ inlet = 1
+$ outlet = 2
+$ fsi = 3
+$ bottom-wall = 4
+$ top-wall = 5
+$ bottom-fix = 6
+$ fluid = 7
+$ body = 8

@@ -1,0 +1,107 @@
+! Ideal 1D flow obtained by periodic BCs for the pressure
+! This enables testing of nonnewtonian velocity profiles
+! For the first nonlinear system iteration newtonian model is enforced.
+
+
+
+Header
+  CHECK KEYWORDS Warn
+  Mesh DB "." "block"
+  Include Path ""
+  Results Directory ""
+End
+
+Simulation
+!  Max Output Level = 5
+  Coordinate System =  Cartesian 2D
+  Coordinate Mapping(3) = 1 2 3
+
+  Simulation Type = Steady
+  Steady State Max Iterations = 20
+
+  Output Intervals = 1
+ Post File = "case.vtu"
+! Output File = "Step.dat"
+
+End
+
+Constants
+
+End
+
+Body 1
+  Target Bodies(1) = 1
+  Name = "Body 1"
+  Equation = 1
+  Material = 1
+End
+
+
+Solver 1
+
+   Equation = "Navier-Stokes"
+   Stabilization Method = String Bubbles
+
+   Linear System Solver = Iterative
+   Linear System Iterative Method = BiCGStab
+   Linear System Max Iterations = 500
+
+   Stabilization Method = String Stabilized
+
+   Linear System Convergence Tolerance = 1.0e-8
+   Linear System Preconditioning = ILU0
+   Linear System Residual Output = 1
+   Steady State Convergence Tolerance = 1.0e-5
+
+   Nonlinear System Convergence Tolerance = 1.0e-5
+   Nonlinear System Max Iterations = 1
+   Nonlinear System Newton After Iterations = 3
+   Nonlinear System Newton After Tolerance = 1.0e-2
+   Nonlinear System Relaxation Factor = 1.0
+
+End
+
+
+Equation 1
+  Name = "Equation1"
+   Navier-Stokes = True
+End
+
+Material 1
+  Density = 1000
+  Viscosity = 0.001
+
+
+End
+
+
+Boundary Condition 1
+  Target Boundaries(1) = 2
+  Name = "outlet"
+   Pressure = 0
+   Velocity 2 = 0
+
+End
+
+Boundary Condition 2
+  Target Boundaries(1) = 4
+  Name = "inlet"
+  Velocity 2 = 0
+
+  Velocity 1 = Variable Coordinate 2
+      Real Procedure "functions" "InFlow"
+
+End
+
+Boundary Condition 3
+  Target Boundaries(2) = 1 3
+  Name = "Bottom"
+  Velocity 1 = 0.0
+  Velocity 2 = 0.0
+End
+
+
+
+
+Solver 1 :: Reference Norm = Real 0.42691131
+

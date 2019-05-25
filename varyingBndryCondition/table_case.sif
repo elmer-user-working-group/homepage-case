@@ -1,0 +1,150 @@
+! Ideal 1D flow obtained by periodic BCs for the pressure
+! This enables testing of nonnewtonian velocity profiles
+! For the first nonlinear system iteration newtonian model is enforced.
+
+
+
+Header
+  CHECK KEYWORDS Warn
+  Mesh DB "." "block"
+  Include Path ""
+  Results Directory ""
+End
+
+Simulation
+!  Max Output Level = 5
+  Coordinate System =  Cartesian 2D
+  Coordinate Mapping(3) = 1 2 3
+
+  Simulation Type = Steady
+  Steady State Max Iterations = 20
+
+  Output Intervals = 1
+ Post File = "case.vtu"
+! Output File = "Step.dat"
+
+End
+
+Constants
+
+End
+
+Body 1
+  Target Bodies(1) = 1
+  Name = "Body 1"
+  Equation = 1
+  Material = 1
+End
+
+
+Solver 1
+
+   Equation = "Navier-Stokes"
+   Stabilization Method = String Bubbles
+
+   Linear System Solver = Iterative
+   Linear System Iterative Method = BiCGStab
+   Linear System Max Iterations = 500
+
+   Stabilization Method = String Stabilized
+
+   Linear System Convergence Tolerance = 1.0e-8
+   Linear System Preconditioning = ILU0
+   Linear System Residual Output = 1
+   Steady State Convergence Tolerance = 1.0e-5
+
+   Nonlinear System Convergence Tolerance = 1.0e-5
+   Nonlinear System Max Iterations = 1
+   Nonlinear System Newton After Iterations = 3
+   Nonlinear System Newton After Tolerance = 1.0e-2
+   Nonlinear System Relaxation Factor = 1.0
+
+End
+
+
+Equation 1
+  Name = "Equation1"
+   Navier-Stokes = True
+End
+
+Material 1
+  Density = 1000
+  Viscosity = 0.001
+
+
+End
+
+
+Boundary Condition 1
+  Target Boundaries(1) = 2
+  Name = "outlet"
+   Pressure = 0
+   Velocity 2 = 0
+
+End
+
+Boundary Condition 2
+  Target Boundaries(1) = 4
+  Name = "inlet"
+  Velocity 2 = 0
+
+  Velocity 1 = Variable Coordinate 2
+      Real
+	0	0
+	0.01	0.285544319
+	0.02	0.556811422
+	0.03	0.813801309
+	0.04	1.05651398
+	0.05	1.28494943
+	0.06	1.499107674
+	0.07	1.698988697
+	0.08	1.884592504
+	0.09	2.055919096
+	0.1	2.212968471
+	0.11	2.355740631
+	0.12	2.484235574
+	0.13	2.598453302
+	0.14	2.698393813
+	0.15	2.784057109
+	0.16	2.855443189
+	0.17	2.912552052
+	0.18	2.9553837
+	0.19	2.983938132
+	0.2	2.998215348
+	0.21	2.998215348
+	0.22	2.983938132
+	0.23	2.9553837
+	0.24	2.912552052
+	0.25	2.855443189
+	0.26	2.784057109
+	0.27	2.698393813
+	0.28	2.598453302
+	0.29	2.484235574
+	0.3	2.355740631
+	0.31	2.212968471
+	0.32	2.055919096
+	0.33	1.884592504
+	0.34	1.698988697
+	0.35	1.499107674
+	0.36	1.284949435
+	0.37	1.0565139
+	0.38	0.813801309
+	0.39	0.556811422
+	0.4	0.285544319
+	0.41	0
+      End
+
+End
+
+Boundary Condition 3
+  Target Boundaries(2) = 1 3
+  Name = "Bottom"
+  Velocity 1 = 0.0
+  Velocity 2 = 0.0
+End
+
+
+
+
+Solver 1 :: Reference Norm = Real 0.42691131
+

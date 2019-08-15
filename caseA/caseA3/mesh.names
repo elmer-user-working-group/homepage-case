@@ -1,0 +1,10 @@
+! ----- names for bodies -----
+$ body7 = 7
+! ----- names for boundaries -----
+$ side = 1
+$ inlet = 2
+$ outlet = 3
+$ top = 4
+$ ground = 5
+$ building = 6
+$ bnry7 = 7

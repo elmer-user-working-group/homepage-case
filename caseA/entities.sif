@@ -1,0 +1,150 @@
+$ bndry_layer = 0.05
+
+Header
+  Mesh DB "." "caseA3"
+End
+
+Simulation
+
+  Max Output Level = 5
+  Coordinate System = Cartesian 3D
+  Coordinate Mapping(3) = 1 2 3
+  Simulation Type = Steady
+  Steady State Max Iterations  = 200
+  Output Intervals = 100
+  Post File = "caseA.vtu"
+
+End
+
+Constants
+End
+
+Body 1
+  Target Bodies = 7
+  Equation  = 1
+  Material  = 1
+  Initial Condition = 1
+End
+
+Initial Condition 1
+
+  Velocity 1 = 1
+  Velocity 2 = 0
+  Velocity 3 = 0
+
+End
+
+
+Solver 1
+
+  Equation = Navier-Stokes
+  Stabilization Method=Stabilized
+  Steady State Convergence Tolerance = 1.0e-5
+  Nonlinear System Convergence Tolerance = 1.0e-8
+  Nonlinear System Max Iterations = 20
+  Nonlinear System Newton After Iterations = 3
+  Nonlinear System Relaxation Factor = 0.7
+  Nonlinear System Newton After Tolerance = 1.0e-3
+  Linear System Solver = Iterative
+  Linear System Symmetric = True
+  Linear System Iterative Method = BicgstabL
+  BiCGStabl polynomial degree = 4
+  Linear System Max Iterations = 500
+  Linear System Convergence Tolerance = 1.0e-10
+  Linear System Residual Output = 10
+  Linear System Preconditioning = ILU0
+
+  Reference Norm = Real 0.001
+  Reference Norm Tolerance = Real 1.0e-3
+
+End
+
+Equation 1
+
+  Name = "Equation1"
+  !Navier-Stokes = True
+  Active Solvers = 1
+
+End
+
+
+Material 1
+
+  Viscosity = 0.01
+  Density = 1.0
+
+End
+ 
+
+Boundary Condition 1
+
+   Target Boundaries = 2
+   Velocity 1 = 1
+   Velocity 2 = 0
+   Velocity 3 = 0
+
+End
+
+Boundary Condition 2
+
+   Target Boundaries = 3
+   Pressure = 0
+
+End
+
+
+Boundary Condition 3
+
+  Target Boundaries = 6
+
+  Velocity 1 = 0
+  Velocity 2 = 0
+  Velocity 3 = 0
+
+End
+
+
+
+Boundary Condition 4
+  Target Boundaries(1) =  5
+
+  Velocity 1 = 0
+  Velocity 2 = 0
+  Velocity 3 = 0
+
+End
+
+Boundary Condition  5
+
+!3 side
+  Target Boundaries=  1
+
+  Velocity 2 = 0
+
+End
+
+
+Boundary Condition  6
+
+!4 top
+  Target Boundaries =  4
+
+  Velocity 3 = 0
+
+End
+
+Boundary Condition  7
+
+!4 top
+  Target Boundaries =  7
+
+  Velocity 1 = 0
+  Velocity 2 = 0
+  Velocity 3 = 0
+
+
+End
+
+
+
+RUN

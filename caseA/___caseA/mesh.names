@@ -1,0 +1,9 @@
+! ----- names for bodies -----
+$ fluid = 7
+! ----- names for boundaries -----
+$ inlet = 1
+$ outlet = 2
+$ sidewall = 3
+$ topwall = 4
+$ ground = 5
+$ building = 6

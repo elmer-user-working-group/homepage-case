@@ -1,0 +1,9 @@
+! ----- names for bodies -----
+$ fluid = 5
+$ structure = 6
+! ----- names for boundaries -----
+$ outlet = 1
+$ fluid-wall = 2
+$ structure-wall = 3
+$ interface = 4
+$ bnry7 = 7

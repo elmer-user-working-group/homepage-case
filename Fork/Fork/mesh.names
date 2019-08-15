@@ -1,0 +1,13 @@
+! ----- names for bodies -----
+$ structure = 1
+$ fluid = 2
+! ----- names for boundaries -----
+$ fluid-wall = 4
+$ outlet = 5
+$ interface = 6
+$ bnry7 = 7
+$ bc13 = 13
+$ bc14 = 14
+$ bc15 = 15
+$ bc16 = 16
+$ bc17 = 17

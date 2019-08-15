@@ -1,0 +1,30 @@
+!------ Skeleton for body section -----
+Body 1
+  Name = fluid
+End
+
+Body 2
+  Name = structure
+End
+
+!------ Skeleton for boundary section -----
+Boundary Condition 1
+  Name = outlet
+End
+
+Boundary Condition 2
+  Name = fluid-wall
+End
+
+Boundary Condition 3
+  Name = structure-wall
+End
+
+Boundary Condition 4
+  Name = interface
+End
+
+Boundary Condition 5
+  Name = bnry7
+End
+
